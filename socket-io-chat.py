@@ -1,4 +1,6 @@
 import os
+import cgi
+
 
 from flask import Flask, render_template, g
 from flask.ext.socketio import (
@@ -58,7 +60,6 @@ class Chat(object):
     def connect():
         _id = get_session_id()
         username = "Guest_%s" % _id
-
         print('Client connected: %s' % username)
         emit('client_connected', {'status': 'OK', "id": _id, "username": username})
         emit('client_joined', {'status': 'OK', "id": _id, "username": username}, broadcast=True)
@@ -79,7 +80,7 @@ class Chat(object):
         _id = get_session_id()
         client = Chat().get_client(_id)
         app.logger.debug("message from %s: ", _id, msg)
-        emit("message", {"status": "OK", "id": _id, "username": client, "msg": msg}, broadcast=True)
+        emit("message", {"status": "OK", "id": _id, "username": client, "msg": cgi.escape(msg)}, broadcast=True)
 
 
     @staticmethod
@@ -89,7 +90,7 @@ class Chat(object):
 
 
 def socket_io_app_run():
-    socketio.run(app)
+    socketio.run(app, host="0.0.0.0", port=5000)
 
 
 if __name__ == '__main__':
