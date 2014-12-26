@@ -2,17 +2,26 @@ requirejs.config({
     baseUrl: '/static/js/libs',
     paths: {
         app: '../app',
-        "jquery-conflict": 'jquery-1.11.2.min',
-        "jquery": "../jquery-wrap",
+        zepto: "zepto.min",
         backbone: "backbone",
         rssi: 'rssi',
         "socket.io": "socket.io-0.9.16",
-        "underscore": "underscore"
+        "underscore": "underscore",
+        urlArgs: "r=2"
+    },
+    map: {
+        "*": {jquery: "zepto"}
     },
     shim: {
-        backbone: ["jquery", "underscore"]
-    },
-    urlArgs: "r=2"
+        backbone: ["zepto", "underscore"],
+        zepto: {
+            exports: "$"
+        },
+
+        underscore: {
+            exports: "_"
+        }
+    }
 });
 
 

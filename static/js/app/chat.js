@@ -1,6 +1,6 @@
 
 
-define(["jquery", "rsii", "socket.io"], function($, fmt, io){
+define(["zepto", "rsii", "socket.io"], function($, fmt, io){
     var socket = io.connect('http://' + document.domain + ':' + location.port);
     var chat_ns = socket.of("/chat");
 
