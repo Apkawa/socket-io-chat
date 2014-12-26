@@ -5,7 +5,7 @@ requirejs.config({
         "jquery-conflict": 'jquery-1.11.2.min',
         "jquery": "../jquery-wrap",
         backbone: "backbone",
-        rsii: 'rssi',
+        rssi: 'rssi',
         "socket.io": "socket.io-0.9.16",
         "underscore": "underscore"
     },

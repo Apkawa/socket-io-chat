@@ -86,7 +86,8 @@ class Chat(object):
     @staticmethod
     @socketio.on('client_list', namespace=CHAT_NAMESPACE)
     def list():
-        emit("client_list", {"status": "OK", "clients": Chat().get_clients()})
+        clients = [{"id": key, "username": value} for key, value in Chat().get_clients().items()]
+        emit("client_list", {"status": "OK", "clients": clients})
 
 
 def socket_io_app_run():
